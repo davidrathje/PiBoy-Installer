@@ -3,10 +3,13 @@
 apt-get update
 apt-get install -y dist-upgrade
 
+cd /boot
+
+cp -r boot/osd.cfg /boot/firmware/
+
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts
 cp -r /PiBoy-Setup/opt/retropie/configs/all/emulationstation/scripts/* /opt/retropie/configs/all/emulationstation/scripts
-
-cp -r /boot/osd.cfg /boot/firmware/	
+	
 cp -r /PiBoy-Setup/home/pi/osd /home/pi
 cp -r /PiBoy-Setup/usr/src/* /usr/src	
 
@@ -15,7 +18,7 @@ cp -r /PiBoy-Setup/usr/lib/systemd/system/* /usr/lib/systemd/system
 chmod +x /home/pi/osd/*
 chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
 
-git clone http://github.com/dell/dkms
+git clone https://github.com/dell/dkms.git
 make install-debian
 
 cd /usr/src/
