@@ -1,0 +1,10 @@
+[Unit]
+Description=Installer Splash screen
+
+[Install]
+WantedBy=basic.target
+
+[Service]
+Type=oneshot
+ExecPreStart=chmod +x /home/pi/osd/pngview
+ExecStart=/home/pi/osd/pngview -l40000 -n /home/pi/osd/resources/installing.png
