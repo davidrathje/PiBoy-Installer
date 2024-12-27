@@ -3,9 +3,9 @@
 apt-get update
 apt-get install -y dist-upgrade
 
-cd /boot
+cd /boot/
 
-cp -r boot/osd.cfg /boot/firmware/
+cp -r osd.cfg firmware/
 
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts
 cp -r /PiBoy-Setup/opt/retropie/configs/all/emulationstation/scripts/* /opt/retropie/configs/all/emulationstation/scripts
@@ -76,13 +76,12 @@ dtparam=eth_led0=4
 dtparam=eth_led1=4
 
 "
+cd /boot/
 
-touch /boot/firmware/config.txt
-echo "${CONFIG_TXT}" > /boot/firmware/config.txt 
+touch firmware/config.txt
+echo "${CONFIG_TXT}" > firmware/config.txt 
 
 git clone --depth=1 http://github.com/RetroPie/RetroPie-Setup.git
 
 cd /RetroPie-Setup/
 ./retropie_setup.sh
-
-reboot
