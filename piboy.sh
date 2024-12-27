@@ -1,19 +1,24 @@
+
 #!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+PAYLOAD_DIR="${SCRIPT_DIR}/PiBoy-Installer/PiBoy-Setup/"
 
 apt-get update
 apt-get install -y dist-upgrade
 
-cd /boot/
+cp -r "${PAYLOAD_DIR}/PiBoy-Installer/osd.cfg" /boot/firmware
 
-cp -r PiBoy_Installer/osd.cfg firmware/
-
+cp -r "${PAYLOAD_DIR}/home/pi/osd" /home/pi
+cp -r $PAYLOAD_DIR/usr/src/* /usr/src
+'
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts
-cp -r PiBoy-Installer/PiBoy-Setup/opt/retropie/configs/all/emulationstation/scripts/* /opt/retropie/configs/all/emulationstation/scripts
-	
-cp -r PiBoy-Installer/PiBoy-Setup/home/pi/osd /home/pi
-cp -r PiBoy-Installer/PiBoy-Setup/usr/src/* /usr/src	
+cp -r $PAYLOAD_DIR/opt/retropie/configs/all/emulationstation/scripts/* /opt/retropie/configs/all/emulationstation/scripts
 
-cp -r PiBoy-Installer/PiBoy-Setup/usr/lib/systemd/system/* /usr/lib/systemd/system
+cp -r $PAYLOAD_DIR/usr/lib/systemd/system/* /usr/lib/systemd/system
 
 chmod +x /home/pi/osd/*
 chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
@@ -76,12 +81,11 @@ dtparam=eth_led0=4
 dtparam=eth_led1=4
 
 "
-cd /boot/
 
-touch firmware/config.txt
-echo "${CONFIG_TXT}" > firmware/config.txt 
+touch /boot/firmware/config.txt
+echo "${CONFIG_TXT}" > /boot/firmware/config.txt 
 
 git clone --depth=1 http://github.com/RetroPie/RetroPie-Setup.git
 
-cd RetroPie-Setup/
+cd /RetroPie-Setup/
 ./retropie_setup.sh
