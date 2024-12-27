@@ -2,13 +2,6 @@
 
 apt-get update
 apt-get install -y dist-upgrade
-apt-get install git
-apt-get install -y wget unzip
-
-git clone --depth=1 https://github.com/RetroPie/RetroPie-Setup.git
-
-cd /RetroPie-Setup/
-./retropie_setup.sh
 
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts
 cp -r /PiBoy-Setup/opt/retropie/configs/all/emulationstation/scripts/* /opt/retropie/configs/all/emulationstation/scripts
@@ -22,8 +15,8 @@ cp -r /PiBoy-Setup/usr/lib/systemd/system/* /usr/lib/systemd/system
 chmod +x /home/pi/osd/*
 chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
 
-git clone https//github.com/dell/dkms
-sudo make install-debian
+git clone http://github.com/dell/dkms
+make install-debian
 
 cd /usr/src/
 dkms install xpi_gamecon/1.0
@@ -83,5 +76,10 @@ dtparam=eth_led1=4
 
 touch /boot/firmware/config.txt
 echo "${CONFIG_TXT}" > /boot/firmware/config.txt 
+
+git clone --depth=1 http://github.com/RetroPie/RetroPie-Setup.git
+
+cd /RetroPie-Setup/
+./retropie_setup.sh
 
 reboot
