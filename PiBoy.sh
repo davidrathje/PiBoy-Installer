@@ -1,24 +1,46 @@
 #!/usr/bin/env bash
 
 apt-get update
-apt-get dist-upgrade
+apt-get install -y dist-upgrade
 apt-get install git
 apt-get install -y wget unzip
 
 git clone --depth=1 https://github.com/RetroPie/RetroPie-Setup.git
 
 cd /RetroPie-Setup/
-./retropie_setup.sh	
+./retropie_setup.sh
 
-cd /bootfs
+mkdir -p /opt/retropie/configs/all/emulationstation/scripts
+cp -r /PiBoy-Setup/opt/retropie/configs/all/emulationstation/scripts/* /opt/retropie/configs/all/emulationstation/scripts
+
+cp -r /boot/osd.cfg /boot/firmware/	
+cp -r /PiBoy-Setup/home/pi/osd /home/pi
+cp -r /PiBoy-Setup/usr/src/* /usr/src	
+
+cp -r /PiBoy-Setup/usr/lib/systemd/system/* /usr/lib/systemd/system
+
+chmod +x /home/pi/osd/*
+chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
+
+git clone https//github.com/dell/dkms
+sudo make install-debian
+
+cd /usr/src/
+dkms install xpi_gamecon/1.0
+
+sed -zi '/xpi-gamecon/!s/$/\nxpi-gamecon/' /etc/modules
+
+systemctl enable xpi_gamecon_shutdown.service
+systemctl enable xpi_gamecon_reboot.service
+
+apt-get install -y raspberrypi-kernel-headers
 
 CONFIG_TXT="
 
 # BOOT
 auto_initramfs=1
-arm_boost=1
 gpio=0-9,12-17,20-25=a2
-disable_splash=1
+disable_splash=1	
 boot_delay=0
 
 # DISPLAY
@@ -37,9 +59,9 @@ dpi_timings=640 1 80 80 80 480 1 13 13 13 0 0 0 70 0 32000000 1 # DEFAULT
 #dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1  # RPI4 ONLY
 
 # HDMI
-#hdmi_mode:1=85
-#hdmi_group:1=2
-#hdmi_drive1=2
+hdmi_mode:1=85
+hdmi_group:1=2
+hdmi_drive1=2
 
 # AUDIO (snd_bcm2835)
 dtparam=audio=on
@@ -59,18 +81,7 @@ dtparam=eth_led1=4
 
 "
 
-touch /boot/config.txt
-echo "${CONFIG_TXT}" > /bootfs/config.txt 
-
-chmod +x /home/pi/osd/*
-chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
-
-cd /usr/src/
-dkms install xpi_gamecon/1.0
-
-sed -zi '/xpi-gamecon/!s/$/\nxpi-gamecon/' /etc/modules
-
-systemctl enable xpi_gamecon_shutdown.service
-systemctl enable xpi_gamecon_reboot.service
+touch /boot/firmware/config.txt
+echo "${CONFIG_TXT}" > /boot/firmware/config.txt 
 
 reboot
