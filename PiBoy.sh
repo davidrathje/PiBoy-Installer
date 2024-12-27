@@ -15,14 +15,10 @@ git clone --depth=1 https://github.com/davidrathje/PiBoy_Utilities/
 cd /pi
 
 mkdir -p PiBoy-Setup
-unzip *.zip 'PiBoy-Setup/*' -d PiBoy-Setup
-
-rm -f *.zip
-
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts
 mkdir -p /usr/lib/systemd/system
 
-cp -r /PiBoy-Setup/utilities/" /boot/
+cp -r /PiBoy-Setup/ /PiBoy-Setup
 
 chmod +x /home/pi/osd/*
 chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
