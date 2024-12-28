@@ -117,6 +117,11 @@ boot_delay=0
 initial_turbo=60
 force_eeprom_read=0
 
+[pi4]
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
+#arm_64bit=1
+
 ##10% overclock
 arm_freq=1100
 over_voltage=8
@@ -153,7 +158,7 @@ dpi_output_format=0x070016
 enable_dpi_lcd=1
 
 ##Default
-dpi_timings=640 1 80 80 80 480 1 13 13 13 0 0 0 70 0 32000000 1
+dpi_timings=640 1 60 60 60 480 1 13 13 13 0 0 0 75 0 32000000 1
 
 ##Alternate 60hz setting for Pi4 only.
 #dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1               
@@ -173,6 +178,7 @@ enable_dpi_lcd=0
 
 touch /boot/osd.cfg
 echo "${OSD_CFG}" > /boot/osd.cfg
+
 touch /boot/config.txt
 echo "${CONFIG_TXT}" > /boot/config.txt
 
