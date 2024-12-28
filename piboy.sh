@@ -22,17 +22,21 @@ chmod +x /opt/retropie/configs/all/emulationstation/scripts/*
 OSD_CFG=" 
 #classicaudio Use PCM instead of HDMI/HEADPHONE audio devices
 #classicaudio
+
 #loadwait sets an application to wait to open before closing the boot splash screen
 #loadwait
 #emulationstation
+
 #LED maximum brightness
 redled
 5	
 greenled
 5
+
 ##Volumeicon enables displaying the volume slider when changing volume. 0 disables display.  1 thru 100 sets transparency(alpha).
 volumeicon
 75
+
 ##Fanduty defines the number of temperature bands and fan power for each given temperature.  
 #temps are in millidegrees
 #duty/power is in tenths of a percent.  0 to 254 = 0% to 25.4% duty. Setting 255 will set 100% power.
@@ -45,6 +49,7 @@ fanduty
 65000 140
 70000 200
 75000 220
+
 ##Temperature shows processor temp in degrees C
 #alpha 0 to 100
 #x 0 to 639
@@ -77,18 +82,21 @@ current
 190
 5
 small
-##Bluetooth
+
+##Bluetooth disabled
 bluetooth
 100
 550
 0
 amall
+
 ##WIFI
 wifi
 100
 580
 0
 small
+
 ##Battery
 battery
 100
@@ -125,13 +133,12 @@ dtparam=audio=on
 audio_pwm_mode=2
 dtoverlay=audremap,pins_18_19
 
-##Disable ACT LED
-dtparam=act_led_trigger=none
-dtparam=act_led_activelow=off
-  
-##Disable PWR / ETHERNET LED
+
+##Disable PWR / ACT / ETHERNET LED
 dtparam=pwr_led_trigger=none
 dtparam=pwr_led_activelow=off
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=off
 dtparam=eth_led0=4
 dtparam=eth_led1=4
 
@@ -149,7 +156,7 @@ enable_dpi_lcd=1
 dpi_timings=640 1 80 80 80 480 1 13 13 13 0 0 0 70 0 32000000 1
 
 ##Alternate 60hz setting for Pi4 only.
-dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1               
+#dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1               
 
 ##Start with these settings first. This is like hdmi_safe interlaced.
 #hdmi_safe=1
