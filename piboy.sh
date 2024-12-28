@@ -7,7 +7,6 @@ SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PAYLOAD_DIR="${SCRIPT_DIRECTORY}/PiBoy-Installer/PiBoy-Setup"
 
 apt-get update
-apt-get install -y wget
 
 cp -r "${PAYLOAD_DIR}/home/pi/osd" /home/pi
 cp -r $PAYLOAD_DIR/usr/src/* /usr/src
@@ -144,13 +143,13 @@ hvs_set_dither=0x210
 dpi_group=2
 dpi_mode=87
 dpi_output_format=0x070016
- 
-##Alternate 60hz setting for Pi4 only.
-dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1
+enable_dpi_lcd=1
 
 ##Default
-#dpi_timings=640 1 80 80 80 480 1 13 13 13 0 0 0 70 0 32000000 1               
-enable_dpi_lcd=1
+dpi_timings=640 1 80 80 80 480 1 13 13 13 0 0 0 70 0 32000000 1
+
+##Alternate 60hz setting for Pi4 only.
+dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1               
 
 ##Start with these settings first. This is like hdmi_safe interlaced.
 #hdmi_safe=1
