@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-PAYLOAD_DIR="${SCRIPT_DIR}/PiBoy-Installer/PiBoy-Setup"
+PAYLOAD_DIR="${SCRIPT_DIRECTORY}/PiBoy-Installer/PiBoy-Setup"
 
 apt-get update
 apt-get install -y wget
