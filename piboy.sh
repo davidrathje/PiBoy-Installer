@@ -6,6 +6,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 PAYLOAD_DIR="${SCRIPT_DIR}/PiBoy-Installer/PiBoy-Setup"
 
+apt-get update
+apt-get install -y wget
+
 cp -r "${PAYLOAD_DIR}/home/pi/osd" /home/pi
 cp -r $PAYLOAD_DIR/usr/src/* /usr/src
 
@@ -149,7 +152,7 @@ dpi_timings=640 1 56 4 42 480 1 16 4 12 0 0 0 60 0 22800000 1
 #dpi_timings=640 1 80 80 80 480 1 13 13 13 0 0 0 70 0 32000000 1               
 enable_dpi_lcd=1
 
-##Start with these settings first.  The piboydmg + pi zero w does not seem to like any non interlaced display mode
+##Start with these settings first. This is like hdmi_safe interlaced.
 #hdmi_safe=1
 hdmi_force_hotplug=1
 config_hdmi_boost=4
@@ -166,9 +169,6 @@ touch /boot/osd.cfg
 echo "${OSD_CFG}" > /boot/osd.cfg
 touch /boot/config.txt
 echo "${CONFIG_TXT}" > /boot/config.txt
-
-apt-get update
-apt-get install -y wget unzip
 
 cd /usr/src/
 dkms install xpi_gamecon/1.0
