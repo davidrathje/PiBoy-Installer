@@ -4,7 +4,7 @@ set -euo pipefail
 
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-PAYLOAD_DIR="${SCRIPT_DIRECTORY}/PiBoy-Installer/PiBoy-Setup"
+PAYLOAD_DIR="${SCRIPT_DIRECTORY}/PiBoy-Setup"
 
 apt-get update
 
